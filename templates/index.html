@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 로또 번호 생성기</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI 로또 번호 생성기</h1>
+            <p class="subtitle">머신러닝 기반 번호 분석 & 생성</p>
+        </header>
+
+        <!-- 컨트롤 패널 -->
+        <section class="control-panel">
+            <div class="control-row">
+                <div class="control-group">
+                    <label for="strategy">분석 전략</label>
+                    <select id="strategy">
+                        <option value="ensemble">앙상블 (전략 종합)</option>
+                        <option value="frequency">빈도 분석</option>
+                        <option value="random_forest">랜덤 포레스트</option>
+                        <option value="pattern">패턴 분석</option>
+                        <option value="zone">구간 분석</option>
+                        <option value="sum_optimize">합계 최적화</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="sets">생성 세트 수</label>
+                    <select id="sets">
+                        <option value="1">1세트</option>
+                        <option value="3">3세트</option>
+                        <option value="5" selected>5세트</option>
+                        <option value="10">10세트</option>
+                    </select>
+                </div>
+            </div>
+            <div class="button-row">
+                <button id="btn-generate" class="btn btn-primary">번호 생성</button>
+                <button id="btn-stats" class="btn btn-secondary">통계 보기</button>
+                <button id="btn-draws" class="btn btn-secondary">당첨번호</button>
+                <button id="btn-fetch" class="btn btn-outline">데이터 갱신</button>
+            </div>
+        </section>
+
+        <!-- 로딩 -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <span>분석 중...</span>
+        </div>
+
+        <!-- 생성 결과 -->
+        <section id="results" class="results hidden">
+            <h2>생성 결과 <span id="result-strategy" class="badge"></span></h2>
+            <div id="number-sets"></div>
+        </section>
+
+        <!-- 전략별 상세 (앙상블 시) -->
+        <section id="strategy-details" class="strategy-details hidden">
+            <h2>전략별 분석 결과</h2>
+            <div id="strategy-list"></div>
+        </section>
+
+        <!-- 통계 대시보드 -->
+        <section id="stats-panel" class="stats-panel hidden">
+            <h2>통계 대시보드</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>최신 당첨번호</h3>
+                    <div id="latest-draw"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>기본 통계</h3>
+                    <div id="basic-stats"></div>
+                </div>
+                <div class="stat-card wide">
+                    <h3>핫 번호 <span class="hot">최근 자주 출현</span></h3>
+                    <div id="hot-numbers"></div>
+                </div>
+                <div class="stat-card wide">
+                    <h3>콜드 번호 <span class="cold">최근 미출현</span></h3>
+                    <div id="cold-numbers"></div>
+                </div>
+                <div class="stat-card full">
+                    <h3>번호별 출현 빈도</h3>
+                    <div id="freq-chart"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 역대 당첨번호 조회 -->
+        <section id="draws-panel" class="draws-panel hidden">
+            <h2>역대 당첨번호</h2>
+            <div class="draws-search">
+                <input type="number" id="draw-search" placeholder="회차 번호 검색" min="1">
+                <button id="btn-draw-search" class="btn btn-secondary">검색</button>
+                <button id="btn-draw-reset" class="btn btn-secondary">전체</button>
+            </div>
+            <div id="draws-list"></div>
+            <div id="draws-pager" class="draws-pager"></div>
+        </section>
+
+        <!-- 생성 이력 -->
+        <section id="history-panel" class="history-panel">
+            <h2>생성 이력</h2>
+            <div id="history-list">
+                <p class="empty-msg">아직 생성된 번호가 없습니다.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

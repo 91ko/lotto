@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+.vercel
+page_dump.html
+새 텍스트 문서.txt
