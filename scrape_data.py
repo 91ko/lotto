@@ -12,7 +12,7 @@ BATCH_SIZE = 100  # 한 번에 조회할 회차 수
 
 def scrape_all():
     print("Chrome 브라우저 시작...")
-    driver = uc.Chrome(version_main=145)
+    driver = uc.Chrome(version_main=147)
 
     try:
         driver.get("https://www.dhlottery.co.kr/lt645/result")
